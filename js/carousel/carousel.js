@@ -189,21 +189,12 @@
 
 	Carousel.prototype.destroy = function () {
 
+		// remove keyboard event listener
 		document.removeEventListener("keyup", this.keyboardHandleListener);
 		
-		while (this.html_nest.firstChild) {
-
-		    this.html_nest.removeChild(this.html_nest.firstChild);
-
-		}
-
+		// remove carousel from DOM
+	    this.html_nest.removeChild(this.html_nest.firstChild);
 		this.html_nest.className = "";
-
-		for (var key in this) {
-
-			this[key] = null;
-
-		}
 
 	}
 
@@ -218,7 +209,7 @@
 
 		if (codes[e.keyCode]) {
 
-			codes[e.keyCode].bind(this)(e);
+			codes[e.keyCode].call(this, e);
 
 		}
 
@@ -379,7 +370,7 @@
 			current: current,
 			afterTransitionHandler: afterTransitionHandler
 		};
-		animation_functions[this.animation].bind(this)(animation_options);
+		animation_functions[this.animation].call(this, animation_options);
 
 		this.current_image_index = next_image_index;
 		this.updateImageDots();
