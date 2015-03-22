@@ -19,7 +19,7 @@ function ListView (collection, nest) {
 	sort_view_container.appendChild(sort_view.html);
 
 	search_view_container = this.html.querySelector(".search-container");
-	search_view_container.appendChild(search_view.html);	
+	search_view_container.appendChild(search_view.html);
 
 	this.nest.appendChild(this.html);
 
@@ -62,7 +62,7 @@ ListView.prototype.renderList = function () {
 
 	while (this.list_container.firstChild) {
 	    this.list_container.removeChild(this.list_container.firstChild);
-	}	
+	}
 
 	for (i = 0; i < collection_length; i++) {
 
@@ -84,6 +84,7 @@ ListView.prototype.showCarousel = function (e) {
 		current_item_index,
 		carousel_images = [];
 
+	// Да да тройное равно!
 	if (item_collection_len === 0) {
 		return;
 	}

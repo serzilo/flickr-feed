@@ -1,9 +1,21 @@
 .crsl-container {
 	position: fixed;
 
+    /*
+    Свойств:
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    уже достаточно, чтобы блок был на весь экран.
+    Т.е. эти свойства не обязатаельные
+        bottom: 0;
+        right: 0;
+    */
+
 	height: 100%;
 	width: 100%;
-    
+
     top: 0;
     bottom: 0;
     left: 0;
@@ -52,7 +64,7 @@
 	-webkit-transition: background 0.2s ease-out 0s;
     -moz-transition: background 0.2s ease-out 0s;
     -o-transition: background 0.2s ease-out 0s;
-    transition: background 0.2s ease-out 0s;    
+    transition: background 0.2s ease-out 0s;
 }
 
 .crsl-btn-circle:hover {
@@ -71,6 +83,7 @@
 	height: 0px;
 	border-style: solid;
 	border-width: 15px 0 15px 26.0px;
+    /* Я такого даже никогда не использовал) */
 	border-color: transparent transparent transparent rgba(255, 255, 255, 0.5);
 
 }
@@ -138,7 +151,7 @@
 	-webkit-transition: border-color 0.2s ease-out 0s;
     -moz-transition: border-color 0.2s ease-out 0s;
     -o-transition: border-color 0.2s ease-out 0s;
-    transition: border-color 0.2s ease-out 0s;    	
+    transition: border-color 0.2s ease-out 0s;
 }
 
 .crsl-image-dot:hover {

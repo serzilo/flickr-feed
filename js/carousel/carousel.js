@@ -48,7 +48,7 @@
 
 	// setup helper property: "transform" css property name
 	Carousel.prototype.css_transform = (function () {
-	    
+
 	    var i,
 	    	p,
 	    	el = document.createElement('div'),
@@ -77,6 +77,7 @@
 			button_right,
 			carousel_container,
 			div = document.createElement("div"),
+			// можно было пойти до конца и положить этот HTML в шаблон
 			template = '<div class="crsl-container crsl-transparent crsl-transitioning">\
 							<div class="crsl-image"></div>\
 							<a class="crsl-button_left crsl-btn-circle"><div class="crsl-arrow_left"></div></a>\
@@ -104,6 +105,7 @@
 		// display "dot" image selector
 		this.createImageDots();
 
+		// Да! .bind(this) - это серьёзно!
 		// button events
 		button_left = this.fragment.querySelector(".crsl-button_left");
 		button_left.addEventListener("click", this.slideLeft.bind(this), false);
@@ -124,14 +126,14 @@
 	}
 
 	Carousel.prototype.loadContextImages = function (opts) {
-		
+
 		var image_index = opts.image_index,
 			prev_image_index = this.getNextImageIndex({
-				direction: "prev", 
+				direction: "prev",
 				image_index: image_index
 			}),
 			next_image_index = this.getNextImageIndex({
-				direction: "next", 
+				direction: "next",
 				image_index: image_index
 			});
 
@@ -145,7 +147,7 @@
 
 			this.images[next_image_index].src = this.gallery_images[next_image_index];
 
-		}			
+		}
 
 	}
 
@@ -168,12 +170,12 @@
 			loading.parentNode.removeChild(loading);
 
 		}
-		
+
 
 	}
 
 	Carousel.prototype.show = function () {
-		
+
 		// insert in DOM
 		this.html_nest.appendChild(this.fragment);
 
@@ -191,7 +193,7 @@
 
 		// remove keyboard event listener
 		document.removeEventListener("keyup", this.keyboardHandleListener);
-		
+
 		// remove carousel from DOM
 	    this.html_nest.removeChild(this.html_nest.firstChild);
 		this.html_nest.className = "";
@@ -241,8 +243,9 @@
 			images_len = this.images_len,
 			add = {"prev": -1,
 					"next": 1};
-		
+
 		next_image_index += add[direction];
+		// сложно написано.
 		next_image_index = next_image_index < 0 ? images_len - 1 : next_image_index === images_len ? 0 : next_image_index;
 
 		return next_image_index;
@@ -255,19 +258,20 @@
 		var current_image_index = opts.current_image_index,
 			next_image_index = opts.next_image_index,
 			images_len = opts.images_len;
-		
+
+		// тоже сложно
 		if (next_image_index === 0 && current_image_index === images_len - 1) {
 
 			return "next";
 
-		} 
+		}
 
 		if (next_image_index === images_len - 1 && current_image_index === 0) {
 
 			return "prev";
 
-		} 
-		
+		}
+
 		return current_image_index > next_image_index ? "prev" : "next";
 
 	}
@@ -329,21 +333,21 @@
 
 				e.stopPropagation();
 				e.preventDefault();
-				
+
 				carousel_image.removeEventListener(this.transition_end, afterTransitionHandler);
 				carousel_image.style.cssText = "";
 				carousel_image.className = "crsl-image";
 
 				current.parentNode.removeChild(current);
 				buffer.className = "crsl-current";
-				buffer.style.cssText = "";						
+				buffer.style.cssText = "";
 				this.is_animating = false;
 
 			},
 			afterTransitionHandler = afterTransition.bind(this);
 
 		this.removeLoadingSpinner();
-		direction = this.getDirection({ 
+		direction = this.getDirection({
 			current_image_index: current_image_index,
 			next_image_index: next_image_index,
 			images_len: images_len
@@ -370,6 +374,7 @@
 			current: current,
 			afterTransitionHandler: afterTransitionHandler
 		};
+		// Если фронтенд использует .call - он крут!
 		animation_functions[this.animation].call(this, animation_options);
 
 		this.current_image_index = next_image_index;
@@ -384,7 +389,7 @@
 			current = opts.current,
 			shift = opts.direction === "prev" ? 180: -180,
 			afterTransitionHandler = opts.afterTransitionHandler,
-			carousel_image = this.carousel_image;			
+			carousel_image = this.carousel_image;
 
 		buffer.className = "crsl-current crsl-transparent";
 		buffer.style.cssText += this.css_transform + ": translate3d("+ (-shift) + "px, 0px, 0px)";
@@ -428,7 +433,7 @@
 	}
 
 	Carousel.prototype.updateImageDots = function () {
-		
+
 		var prev_dot = this.html_nest.querySelector(".crsl-image-dots .crsl-image-dot_selected"),
 			current_dot = this.image_dots_elements[this.current_image_index];
 
@@ -452,7 +457,7 @@
 		e.preventDefault();
 		e.stopPropagation();
 
-		if (image_index === -1 || image_index === this.current_image_index) { 
+		if (image_index === -1 || image_index === this.current_image_index) {
 
 			return;
 
